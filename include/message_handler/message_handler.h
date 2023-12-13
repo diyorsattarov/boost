@@ -2,7 +2,7 @@
 #ifndef MESSAGE_HANDLER_H
 #define MESSAGE_HANDLER_H
 
-#include <string>
+#include <utilities/utilities.h>
 
 class MessageHandler {
 public:

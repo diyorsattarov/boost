@@ -1,9 +1,7 @@
 #include <message_handler/message_handler.h>
-#include <iostream>
 
 void MessageHandler::handleReceivedMessage(const std::string& message) {
     // Example handling logic
-    std::cout << "Received message: " << message << std::endl;
-
+    Utilities::console_logger()->info("Received message: {}", message);
     // Add logic to process the message
 }
