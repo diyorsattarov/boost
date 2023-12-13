@@ -1,35 +1,18 @@
 cmake_minimum_required(VERSION 3.10)
-
-set(PROJECT_NAME cpp-cmake-template)
+set(PROJECT_NAME cpp-boost)
 
 project(${PROJECT_NAME})
-
 add_subdirectory(src)
 
-# Include directories for your project
-include_directories(include)
-
-set(SOURCES
-    src/bar/bar.cpp
-    src/foo/foo.cpp
-)
-
-add_executable(${PROJECT_NAME} 
-    ${SOURCES}
-    examples/bar/example_bar.cpp
-)
-
-target_include_directories(${PROJECT_NAME} PRIVATE src include examples)
-
+# Assuming you have a tests directory with test sources
 add_executable(tests
-    ${SOURCES}
-    tests/bar/test_bar.cpp
-    tests/foo/test_foo.cpp
+    tests/session/test_session.cpp
+    # ... other test files ...
 )
 
 find_package(GTest REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system serialization)
 target_include_directories(tests PRIVATE ${GTEST_INCLUDE_DIRS})
-
-target_link_libraries(tests PRIVATE ${GTEST_BOTH_LIBRARIES} pthread)
+target_link_libraries(tests PRIVATE ${GTEST_BOTH_LIBRARIES} pthread Boost::system Boost::serialization session client server message_handler utilities)
 
 add_custom_target(run_tests COMMAND tests)
