@@ -12,7 +12,20 @@ add_executable(tests
 
 find_package(GTest REQUIRED)
 find_package(Boost REQUIRED COMPONENTS system serialization)
+find_package(spdlog REQUIRED)
+
 target_include_directories(tests PRIVATE ${GTEST_INCLUDE_DIRS})
-target_link_libraries(tests PRIVATE ${GTEST_BOTH_LIBRARIES} pthread Boost::system Boost::serialization session client server message_handler utilities)
+target_link_libraries(tests PRIVATE 
+    ${GTEST_BOTH_LIBRARIES} 
+    pthread 
+    Boost::system 
+    Boost::serialization 
+    spdlog::spdlog
+    session 
+    client 
+    server 
+    message_handler 
+    utilities
+)
 
 add_custom_target(run_tests COMMAND tests)

@@ -1,5 +1,10 @@
 #include <server/server.h>
-#include <session/session.h>
+
+Server::Server(boost::asio::io_service& io_service, short port)
+    : acceptor_(io_service, tcp::endpoint(tcp::v4(), port)),
+        socket_(io_service) {
+    doAccept();
+}
 
 void Server::doAccept() {
     acceptor_.async_accept(socket_,
